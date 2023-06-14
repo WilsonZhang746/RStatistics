@@ -347,8 +347,8 @@ plot(x, y, type = 'l')
 # rbinom(n, N, p)
 
 #generate 8 random variables of binomial distribution where
-# n = 10, p = 0.2
-rbinom(10, size = 10, prob = 0.2)
+# n = 8, p = 0.2
+rbinom(8, size = 10, prob = 0.2)
 
 
 #generate 1000 random variables of binomial distribution where
@@ -683,5 +683,171 @@ plot(qpois(q_vec,10))
 #  rpois(n, lambda) 
 
 rpois(20, 10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 9. Uniform distribution
+#Probability Density Function
+# dunif(x, min,max)   WHERE x is a value or vector
+# default value for min and max is 0 and 1
+
+
+# generating a sequence of values
+x <- seq(0, 10 , by = 0.2) 
+print ("dunif value")
+
+# calculating density function
+dunif(x, min = 3, max = 8)
+
+
+plot(dunif(x, min = 3, max = 8))
+
+
+#Cumulative probability distribution
+# punif(x,   min,   max)    WHERE x is a value or vector of values
+
+x <- seq(0, 10 , by = 0.2) 
+
+punif (x , min =3 , max = 8)
+
+plot(punif (x , min =3 , max = 8))
+
+
+
+# Quantile for a probability
+# qunif() method is used to calculate the corresponding quantile 
+# for any probability (p) for a given uniform distribution.
+# qunif(p,  min, max)
+# p represents the probability or vector of probabilities
+
+print ("Quantile Function Value")
+
+# calculating the quantile function value
+q <- seq(0, 1 , by = 0.1) 
+
+plot(qunif(q, min = 3, max = 8))
+
+
+#random number generation
+#  runif() is used to generate a sequence of random following 
+# a uniform distribution.  
+# runif(n, min, max)   WHERE n represents how many random number
+#will be generated
+
+print("Generate 10 random numbers of uniform distribution between 3 and 8")
+runif(10, min=3, max=8) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 10.Normal distribution
+
+# dnorm(x, mean, sd) to calculate normal density
+# Example:
+  
+# creating a sequence of values 
+# between -10 to 10 with a step of 0.1
+x = seq(-10, 10, by=0.1)
+
+y = dnorm(x, mean(x), sd(x))
+
+
+# Plot the graph.
+plot(x, y)
+
+
+
+#pnorm() function is used to calculate the cumulative normal probability
+
+#Example:
+  
+# creating a sequence of values
+# between -10 to 10 with a difference of 0.1
+x <- seq(-10, 10, by=0.1)
+
+y <- pnorm(x, mean = 2.5, sd = 2)
+
+
+# Plot the graph.
+plot(x, y)
+
+
+# qnorm() function is the inverse of pnorm() function. It takes 
+#the probability value and gives output which corresponds to 
+# the probability value.
+
+#Example:
+  
+# Create a sequence of probability values 
+# incrementing by 0.02.
+x <- seq(0, 1, by = 0.05)
+
+y <- qnorm(x, mean=10, sd=2)
+
+# Plot the graph.
+plot(x, y)
+
+
+# rnorm() function is used to generate a vector of random numbers
+# which are normally distributed.
+
+#Example:
+  
+# Create a vector of 1000 random numbers
+# with mean=90 and sd=5
+x <- rnorm(10000, mean=90, sd=5)
+
+# Create the histogram with 50 bars
+hist(x, breaks=50)
+
+
+
+
+
+
+
+
+
 
 
