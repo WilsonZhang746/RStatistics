@@ -850,4 +850,99 @@ hist(x, breaks=50)
 
 
 
+### Lecture 11. Exponential distribution
+
+#dexp() Function returns the corresponding values of the 
+# exponential density for an input vector of quantiles.
+
+#Syntax:
+  
+# dexp(x_dexp, rate)
+# rate here represents the mean number occurence of poisson events
+#during a unit time period.
+
+# Specify x-values
+x_dexp <- seq(1, 10, by = 0.1) 
+
+# Apply dexp() function               
+y_dexp <- dexp(x_dexp, rate = 5)    
+
+# Plot dexp values 
+plot(y_dexp)
+
+
+
+#pexp() function returns the corresponding values of the exponential 
+# cumulative distribution function for an input vector of quantiles.
+
+#Syntax:
+  
+# pexp(x_pexp, rate )
+
+# Specify x-values
+x_pexp <- seq(1, 10, by = 0.1)                                     
+
+# Apply pexp() function
+y_pexp <- pexp(x_pexp, rate = 5) 
+
+# Plot values                  
+plot(y_pexp)   
+
+
+
+#qexp() function gives the possibility, we can use the qexp 
+# function to return the corresponding values of the quantile function.
+
+#Syntax:
+  
+#  qexp(x_qexp, rate)
+
+# Specify x-values 
+x_qexp <- seq(0, 1, by = 0.1)                     
+
+# Apply qexp() function
+y_qexp <- qexp(x_qexp, rate = 5)
+
+# Plot values                   
+plot(y_qexp)  
+
+
+
+#rexp() function is used to simulate a set of random numbers 
+# drawn from the exponential distribution.
+
+#Syntax:
+  
+#  rexp(N, rate )
+# Specify size         
+N <- 100
+
+# Draw exp distributed values
+y_rexp <- rexp(N, rate = 5)
+
+# Plot exp density  
+hist(y_rexp, breaks = 50, main = "")
+
+
+#Example 
+# Suppose that a system contains a certain type of component whose 
+# time, in years, to failure is given by T. The random variable T 
+#is modeled nicely by the exponential distribution with mean time 
+# to failure β = 5.  what is the probability that a component 
+# is still functioning at the end of 8 years?
+  
+#Solution : The probability that a given component has failure
+# within 8 years is given by  P(X < 8)
+
+p_less_8 <- pexp(8,1/5)
+
+#the probability that a component 
+# is still functioning at the end of 8 years?
+# equals 1 - P(X < 8)
+
+1 - p_less_8 
+
+
+
+
 
