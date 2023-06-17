@@ -946,3 +946,113 @@ p_less_8 <- pexp(8,1/5)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 12. Gamma distribution
+
+#dgamma() function is used to create gamma density plot which 
+# Syntax:
+# dgamma(x_dgamma, shape, scale) 
+# scale default 1
+
+# R program to plot gamma distribution
+
+# Specify x-values for gamma function
+x_dgamma <- seq(0, 5, by = 0.2)   
+
+# Apply dgamma function
+y_dgamma <- dgamma(x_dgamma, shape = 6, scale = 1/5) 
+
+# Plot dgamma values
+plot(y_dgamma)
+
+
+#pgamma() function is used in cumulative distribution function 
+# (CDF) of the gamma distribution.
+
+#Syntax:
+# pgamma(x_pgamma, shape, scale)
+
+
+# Specify x-values for gamma function
+x_pgamma <- seq(0, 10, by = 0.2)   
+
+# Apply pgamma function
+y_pgamma <- pgamma(x_pgamma, shape = 3) 
+
+# Plot pgamma values
+plot(y_pgamma)
+
+
+#qgamma() Function
+#It is known as gamma quantile function of the gamma distribution 
+#is the inverse operation of pgamma()
+
+#Syntax:
+#  qgamma(x_qgamma, shape)
+
+# Specify x-values for gamma function
+x_qgamma <- seq(0, 1, by = 0.01)   
+
+# Apply qgamma function
+y_qgamma <- qgamma(x_qgamma, shape = 3) 
+
+# Plot qgamma values
+plot(y_qgamma)
+
+
+
+#rgamma() Function is used for generating random number in gamma 
+# distribution.
+
+#Syntax:
+#  rgamma(N, shape, scale)
+
+# Specify sample size
+N <- 1000  
+
+# Draw N gamma distributed values
+y_rgamma <- rgamma(N, shape = 2, scale=1/5) 
+
+# Print values to RStudio console
+y_rgamma 
+
+# Plot of randomly drawn gamma density
+hist(y_rgamma, breaks = 200, main = "")
+
+
+#Example
+#Suppose that telephone calls arriving at a particular switchboard 
+# follow a Poisson process with an average of 5 calls coming per
+# minute. What is the probability that within 1 minutes
+# 2 calls have come in to the switchboard?
+# Solution : The Poisson process applies, with time until 2 Poisson 
+#events following a gamma distribution with β = 1/5 and α = 2. 
+#Denote by X = 1 the time in minutes that transpires before 2 calls 
+#come.The required probability is given by a gamma distribution
+# with alpha = 2,beta = 1/5
+
+alpha = 2
+beta = 1/5
+p_x_less_1 <- pgamma(1, shape= alpha,scale= beta)
+
+
+p_x_less_1
+
+
+
+
