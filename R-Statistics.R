@@ -1056,3 +1056,144 @@ p_x_less_1
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 13. Shapiro–Wilk Test for normality
+
+library("dplyr")
+
+# Using the ToothGrowth package
+# loading the data set
+my_data <- ToothGrowth
+
+str(my_data)
+
+#shapiro.test of 'len' in ToothGrowth data
+shapiro.test(my_data$len)
+
+
+#From the output obtained we can assume normality. The p-value 
+#is greater than 0.05. Hence, the distribution of the given data 
+#is not different from normal distribution significantly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 14. Chi-square distribution and Chi-square test in R
+
+#dchisq gives the density function.
+# dchisq(x, df)
+
+df = 10
+vec <- 1:20
+
+print ("Density function values")
+
+dchisq(vec, df = df)
+
+plot(dchisq(vec, df = df))
+
+
+
+#qchisq gives the quantile function.
+#qchisq(p, df)
+
+free = 5
+qchisq(.75, df=free)
+
+
+
+# pchisq gives the cumulative probability
+# pchisq(q, df)
+# defining degrees of freedom
+df = 5
+
+# calculating for the values in the interval [0,5]
+print ("Calculating for the values [0,5]")
+pchisq(5, df = df)
+
+
+
+
+# rchisq(n, df) returns n random numbers from the chi-square distribution.
+
+x <- rchisq(50000, df = 5)
+
+
+
+hist(x, 
+     freq = FALSE, 
+     xlim = c(0,16), 
+     ylim = c(0,0.2),
+     breaks=100)
+
+
+
+
+
+# Chi-Square Test
+
+#The chi-square test of independence evaluates whether there 
+#is an association between the categories of the two variables.
+
+#We will take the survey data in the MASS library which represents 
+# the data from a survey conducted on students.
+
+# load the MASS package
+library(MASS)        
+print(str(survey))
+
+
+#Our aim is to test the hypothesis whether the students smoking 
+#habit is independent of their exercise level at .05 significance
+# level.
+
+# Create a data frame from the main data set.
+stu_data = data.frame(survey$Smoke,survey$Exer)
+
+# Create a contingency table with the needed variables.           
+stu_data = table(survey$Smoke,survey$Exer) 
+
+print(stu_data)
+
+# applying chisq.test() function
+print(chisq.test(stu_data))
+
+#As the p-value 0.4828 is greater than the .05, we conclude 
+#that the smoking habit is independent of the exercise level of 
+#the student and hence there is a weak or no correlation between 
+# the two variables.
+
+
+
