@@ -1197,3 +1197,222 @@ print(chisq.test(stu_data))
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 15. Beta distribution
+
+# dbeta(xvalues,alpha,beta)
+
+# Plot for Beta Density(1,1)  where we can observe the 
+# uniform distribution between 0 and 1.
+
+# Creating the Sequence
+x_seq = seq(0, 1, by = 0.1)
+
+# Plotting the beta density
+plot(x_seq, dbeta(x_seq, 1,1), xlab="X",
+     ylab = "Beta Density", type = "l",
+     col = "Red")
+
+
+#Plot for Beta Density(2,1) where we can observe linearly 
+# increasing function
+
+# Creating the Sequence
+x_seq = seq(0,1, by=0.1)
+
+# Case 2
+plot(x_seq, dbeta(x_seq, 2,1), xlab="X",
+     ylab = "Beta Density", type = "l",
+     col = "Red")
+
+
+# Plot for Beta Density(2,2) 
+# Creating the Sequence
+x_seq = seq(0,1, by=0.1)
+
+# Case 3
+plot(x_seq, dbeta(x_seq, 2,2), xlab = "X",
+     ylab = "Beta Density", type = "l",
+     col = "Red")
+
+
+
+## Cumulative Distributive Functions
+# pbeta(x, alpha, beta)
+
+# The Beta Distribution
+plr.data <- data.frame(
+  player_avg <- c(seq(0, 1, by = 0.025)),
+  stringsAsFactors = FALSE
+)
+
+# Print the data frame.           
+print(plr.data)
+print(plr.data$player_avg)
+
+
+# Cummilative distribution function
+by2<- pbeta(plr.data$player_avg, shape1 = 4, shape2 = 6)
+par(mar = rep(2,4))
+plot(by2)
+
+
+
+# quantile distribution function, to generate x in terms of probility
+#qbeta(prob, alpha, beta)
+prob_data <- c(seq(0, 1, by = 0.025)) 
+
+by3 <- qbeta(prob_data, shape1 = 4, shape2 = 6)
+par(mar = rep(2,4))
+plot(by3)
+
+
+
+#random number generator, to generate n beta random numbers
+#rbeta(n, alpha, beta) 
+b4 <- rbeta(20, shape1 = 5, shape2 = 8)
+b4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 16. Lognormal distribution
+
+# dlnorm() function is used to compute the log normal value 
+# of the probability density function
+
+# dlnorm(x, meanlog = 0, sdlog = 1) 
+
+# meanlog default 0, sdlog default 1
+
+# Creating x-values for density
+x <- seq(1, 10, by = 0.1)
+
+# Calling dlnorm() function
+y <- dlnorm(x)
+
+# Plot a graph
+plot(x, y)
+
+
+# create another density of lognormal , with meanlog 5, sdlog 2
+
+y <- dlnorm(x, 5,2)
+
+# Plot a graph
+plot(x, y)
+
+
+
+# plnorm() function is used to compute the log normal value of 
+# the cumulative probability density function. 
+
+# plnorm(x, meanlog = 0, sdlog = 1) 
+
+# meanlog default 0, sdlog default 1
+
+# Creating x-values for density
+x <- seq(1, 10, by = 0.1)
+
+# Calling plnorm() function
+y <- plnorm(x)
+plot(x,y)
+
+#using meanlog 5, sdlog 2
+# Calling plnorm() function
+y <- plnorm(x,5,2)
+plot(x,y)
+
+
+#qlnorm() function is used to compute the value of log normal 
+#quantile values, given the cumulative probabilities
+#it is the inverse operation of clnorm()
+
+# qlnorm(probs, meanlog = 0, sdlog = 1) 
+
+# meanlog default 0, sdlog default 1
+
+# Creating x-values for density
+probs <- seq(0, 1, by = 0.05)
+
+# Calling qlnorm() function
+x <- qlnorm(probs)
+plot(probs,x)
+
+
+#using meanlog 5, sdlog 2
+x <- qlnorm(probs, 5, 2)
+plot(probs,x)
+
+
+# rlnorm() function is used to generate random log normal 
+# variates
+
+# rlnorm(n, meanlog = 0, sdlog = 1) 
+
+# meanlog default 0, sdlog default 1
+
+# Set sample size
+N <- 18
+
+# Calling rlnorm() Function
+x <- rlnorm(N)
+x
+
+#using meanlog 5, sdlog 2
+x <- rlnorm(N, 5, 2)
+x 
+
+
+
+
+
