@@ -1375,7 +1375,7 @@ plot(x,y)
 
 #qlnorm() function is used to compute the value of log normal 
 #quantile values, given the cumulative probabilities
-#it is the inverse operation of clnorm()
+#it is the inverse operation of plnorm()
 
 # qlnorm(probs, meanlog = 0, sdlog = 1) 
 
