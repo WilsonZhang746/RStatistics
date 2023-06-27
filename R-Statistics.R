@@ -1416,3 +1416,109 @@ x
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 17. Weibull distribution
+
+#dweibull() is used to compute the value of Weibull Density over 
+# different numeric values for Weibull Distribution.
+
+#Syntax: dweibull(x, shape, scale) 
+#scale default 1
+
+
+# Creating a sequence of x-values
+x <- seq(0, 10, by = 0.2)
+
+k<- 1
+lambda <- 1
+
+# Calling dweibull() Function
+y <- dweibull(x, shape = k, scale=lambda)
+plot(x, y)
+
+
+
+# pweibull() function is used to compute the weibull varaibles'
+# cumulative probability density function. 
+
+# pweibull(x, shape, scale) 
+#scale default 1
+
+
+# Creating a sequence of x-values
+x <- seq(0, 10, by = 0.2)
+
+k<- 1
+lambda <- 1
+
+# Calling pweibull() Function
+y <- pweibull(x, shape = k, scale=lambda)
+plot(x, y)
+
+
+#qweibull() function is used to compute the value of weibull distribution
+#quantile variables values, given the cumulative probabilities
+#it is the inverse operation of pweibull()
+
+# qweibull(prob, shape, scale) 
+#scale default 1
+
+
+# Creating a sequence of probabilities
+probs <- seq(0, 1, by = 0.1)
+
+k<- 1
+lambda <- 1
+
+# Calling qweibull() Function
+y <- qweibull(probs, shape = k, scale=lambda)
+plot(probs, y)
+
+
+
+
+# rweibull() function is used to generate random variables from
+# weibull distribution
+
+# rweibull(n, shape, scale) 
+#scale default 1
+
+# Set sample size
+N <- 18
+
+# Calling rweibull() Function
+x <- rweibull(N, shape = k, scale=lambda)
+x
+
+N <- 10000 
+
+# Calling rweibull() Function
+x <- rweibull(N, shape = k, scale=lambda)
+plot(hist(x))
+
+
+
+
+
+
+
+
+
