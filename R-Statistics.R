@@ -1522,3 +1522,105 @@ plot(hist(x))
 
 
 
+
+
+
+
+
+
+
+
+
+
+### Lecture 18. t-distribution
+
+#dt() function is used To find the value of probability density (pdf)
+#of the Student’s t-distribution given a random variable x
+
+# Syntax: dt(x, df) 
+# x is the quantiles vector
+# df is the degrees of freedom
+
+# Creating a sequence of x-values
+x <- seq(0, 10, by = 0.2)
+df <- 10
+
+plot(x, dt(x,df))
+
+
+
+#pt() function is used to calculate the cumulative distribution 
+#function (CDF) of a t-distribution
+# Syntax: pt(q, df)
+#  q is the quantiles vector
+# df is the degrees of freedom
+
+x <- seq(0, 10, by = 0.2)
+df <- 10
+plot(x, pt(x,df))
+
+
+
+## The qt() function is used to get the quantile function 
+# from given cumulative probabilities
+# It is inverse operation of cumulative probability function
+# Syntax: qt(p, df)
+# Parameter:
+#  p is the vector of probabilities
+# df is the degrees of freedom
+
+probs <- seq(0, 1, by = 0.05)
+df <- 5
+plot(probs, qt(probs,df))
+
+
+
+##rt() is used to generate random variates from t-distribution
+
+# syntax: rt(N, df)
+# parameters: 
+# N : number of random variates
+# df: degrees of freedom
+
+N <- 10000
+df <- 10
+
+plot(hist(rt(N,df)))
+
+
+##Example of t-test of population mean
+
+# A chemical engineer claims that the population mean yield of 
+#a certain batch process is 500 grams per milliliter of raw material.
+#To check this claim he samples 25 batches each month. 
+#If the computed t-value falls between −t0.05 and t0.05, he is 
+#satisfied with this claim. What conclusion should he draw from 
+#a sample that has a mean X-Ba = 518 grams per milliliter and 
+#a sample standard deviation s = 40 grams? Assume the distribution 
+# of yields to be approximately normal.
+
+#Solution : 
+# first we get the critical value of t0.05 
+# using qt(probs, df)
+t_cri <- qt( 1-0.05, 24)
+t_cri   #1.71
+
+# then we calculate the sample t test statistics
+t_sample <- (518 - 500) / (40/sqrt(25))
+t_sample     #2.25
+
+#we can also calcualte the p_value assocated with t_sample
+p_sample <- 1 - pt(t_sample, 24)
+p_sample   #0.0169
+
+
+#As t_sample > t_cri, which also means p_sample < 0.05, 
+# engineer is likely to conclude that the process produces 
+# a better product than he thought, i.e. larger than 500 
+
+
+
+
+
+
+
