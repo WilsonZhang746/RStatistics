@@ -1624,3 +1624,50 @@ p_sample   #0.0169
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Lecture 19. Normal Quantile-Quantile Plot
+
+# Example 1
+# Create random normally distributed values
+x <- rnorm(3200, mean=8, sd=2)
+
+# QQplot of normally distributed values
+qqnorm(x)
+
+# Add qqline to plot
+qqline(x, col = "darkgreen")
+
+
+#Example 2
+# Random values according to logistic distribution
+# QQplot of logistic distribution
+y <- rlogis(3200)
+
+# QQplot of normally distributed values
+qqnorm(y)
+
+# Add qqline to plot
+qqline(y, col = "darkgreen")
+
+
+
+
+
+
+
+
+
+
+
