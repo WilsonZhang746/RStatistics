@@ -1671,3 +1671,51 @@ qqline(y, col = "darkgreen")
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 20. Confidence interval of population mean using t distribution
+
+data(iris)
+# Calculate the mean of the Sepal.Length
+mean_sample <- mean(iris$Sepal.Length)
+
+# Compute the size
+sample_n <- length(iris$Sepal.Length)
+
+# Find the standard deviation
+standard_deviation_S <- sd(iris$Sepal.Length)
+
+# Find the standard error
+standard_error_samplemean <- standard_deviation_S/sqrt(n)
+
+
+
+alpha = 0.05
+degrees_of_freedom = n - 1
+t_score = qt(1-alpha/2, df=degrees_of_freedom)
+#t_score = qt(p=alpha/2, df=degrees_of_freedom,lower.tail=F)
+
+print(t_score)
+
+
+#confidence interval
+## Calculate the lower bound 
+margin_error <- t_score * standard_error_samplemean
+
+lower_bound <- mean_sample - margin_error
+
+# Calculate the upper bound
+upper_bound <- mean_sample + margin_error
+
+
+print(c(lower_bound,upper_bound))
