@@ -1693,7 +1693,7 @@ mean_sample <- mean(iris$Sepal.Length)
 sample_n <- length(iris$Sepal.Length)
 
 # Find the standard deviation
-standard_deviation_S <- sd(iris$Sepal.Length)
+standard_deviation_S <- sd(iris$Sepal.Length)*sqrt((sample_n/(sample_n-1)))
 
 # Find the standard error
 standard_error_samplemean <- standard_deviation_S/sqrt(sample_n)
@@ -1744,7 +1744,8 @@ mean_sample <- mean(iris$Sepal.Length)
 sample_n <- length(iris$Sepal.Length)
 
 # Find the standard deviation
-standard_deviation_S <- sd(iris$Sepal.Length)
+standard_deviation_S <- sd(iris$Sepal.Length)*sqrt((sample_n/(sample_n-1)))
+
 
 # Find the standard error
 standard_error_samplemean <- standard_deviation_S/sqrt(sample_n)
