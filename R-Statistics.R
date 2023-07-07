@@ -1696,7 +1696,7 @@ sample_n <- length(iris$Sepal.Length)
 standard_deviation_S <- sd(iris$Sepal.Length)
 
 # Find the standard error
-standard_error_samplemean <- standard_deviation_S/sqrt(n)
+standard_error_samplemean <- standard_deviation_S/sqrt(sample_n)
 
 
 
@@ -1719,3 +1719,57 @@ upper_bound <- mean_sample + margin_error
 
 
 print(c(lower_bound,upper_bound))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 21. Confidence interval of population mean using 
+# normal distribution
+
+data(iris)
+# Calculate the mean of the Sepal.Length
+mean_sample <- mean(iris$Sepal.Length)
+
+# Compute the size
+sample_n <- length(iris$Sepal.Length)
+
+# Find the standard deviation
+standard_deviation_S <- sd(iris$Sepal.Length)
+
+# Find the standard error
+standard_error_samplemean <- standard_deviation_S/sqrt(sample_n)
+
+
+
+alpha = 0.05
+
+z_score = qnorm(1-alpha/2)
+#z_score = qnorm(p=alpha/2,lower.tail=F)    #alternative formula
+
+print(z_score)
+
+
+#confidence interval
+## Calculate the lower bound 
+margin_error <- z_score * standard_error_samplemean
+
+lower_bound <- mean_sample - margin_error
+
+# Calculate the upper bound
+upper_bound <- mean_sample + margin_error
+
+
+print(c(lower_bound,upper_bound))
+
+
+
