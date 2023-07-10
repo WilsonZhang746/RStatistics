@@ -1774,3 +1774,93 @@ print(c(lower_bound,upper_bound))
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 22. Levene’s Test for homogeneity of variance
+
+#Example 1 of Lavene’s test
+# Levene’s test with one independent variable:
+
+#import the dplyr library
+library("dplyr")
+# Print the random 5 sample
+print(sample_n(PlantGrowth,5))
+
+# R program to illustrate
+# Levene’s test
+
+# Import required package
+library(car)
+
+# Using leveneTest()
+result = leveneTest(weight ~ group, PlantGrowth)
+
+# print the result
+print(result)
+
+
+#example 2
+#Levene’s test with multiple independent variables:
+
+#import the dplyr library
+library("dplyr")
+# Print the random 5 sample
+print(sample_n(ToothGrowth,5))
+
+
+# R program to illustrate
+# Levene’s test
+
+# Import required package
+library(car)
+
+# Using leveneTest()
+result = leveneTest(len ~ interaction(supp, dose),
+                    data = ToothGrowth)
+
+# print the result
+print(result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 23. Bootstrapping correlations
+data(mtcars)
+str(mtcars)
+
+bootTau<-function(mtcar,i) {
+         cor(mtcar$wt[i], mtcar$mpg[i],
+        use = "complete.obs", method = "kendall")
+          }
+
+
+library(boot)
+boot_kendall<-boot(mtcars, bootTau, 2000)
+boot_kendall
+
+
+boot.ci(boot_kendall)
