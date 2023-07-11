@@ -1864,3 +1864,57 @@ boot_kendall
 
 
 boot.ci(boot_kendall)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 24. Biserial and point-biserial correlations
+
+library(polycor)
+
+data("mtcars")
+str(mtcars)
+
+
+#point-biserial correlation
+cor.test(mtcars$vs, mtcars$mpg)
+
+
+#biserial correlation
+
+polyserial(mtcars$vs, mtcars$mpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
