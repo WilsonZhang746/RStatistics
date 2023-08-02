@@ -1975,3 +1975,64 @@ res
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 26. F distribution
+
+
+#To determine the F critical value R provides us qf() function 
+#qf(p, df1, df2)
+
+#Parameters:
+  
+#p: It represents the significance level to be used
+#df1: It represents the numerator degrees of freedom
+#df2: It represents the denominator degrees of freedom
+
+#Example:
+  
+#Let us consider an example in which we want to determine the 
+# F critical value for a significance level equal to 0.01, 
+#numerator degrees of freedom equal 4, and denominator 
+#degrees of freedom = 6.   
+
+qf(p=.01, df1=4, df2=6, lower.tail=FALSE)   
+
+#F test significant if F statistics(from your data) larger than above value
+
+
+
+
+
+# using pf(x, df1, df2) to calculate cumulative probability
+
+pf(9.148301, df1=4, df2=6)    #9.148301 is F statistics from your data
+
+#F test significant if above  value larger than 1- alpha
+
+
+
+
+#df(x, df1,df2) to calculate probability density
+df(9.148301, df1=4, df2=6) 
+
+
+
+#rf(N, df1, df2) to generate N random variables from F distribution
+hist(rf(1000, df1=4, df2=10)) 
+
+
+
+
+
