@@ -2036,3 +2036,41 @@ hist(rf(1000, df1=4, df2=10))
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 27. Ratio of two variances and F-test
+
+# Taking two samples
+x <- rnorm(249, mean = 20)
+y <- rnorm(79, mean = 30)
+# var test in R
+var.test(x, y, alternative = "two.sided")
+
+
+x <- rnorm(249, mean = 20, sd=1.5)
+y <- rnorm(79, mean = 30)
+var.test(x, y, alternative = "two.sided")
+
+var.test(y,x, alternative = "two.sided")
+
+
+
+
+
+
+
+
+
+
