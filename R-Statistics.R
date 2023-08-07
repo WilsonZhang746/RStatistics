@@ -2074,3 +2074,80 @@ var.test(y,x, alternative = "two.sided")
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 28. Partial correlation
+
+setwd("d:\\RStatistics-Tutorial")
+
+#create a dataframe containing only the three variables of interest.
+examData = read.delim("Exam Anxiety.dat", header = TRUE)
+examData2 <- examData[, c("Exam", "Anxiety", "Revise")]
+head(examData2)
+
+#conduct a partial correlation between exam anxiety and exam 
+# performance while ‘controlling’ for the effect of revision time
+
+library(ggm)
+
+#pcor(c("var1", "var2", "control1", "control2" etc.), var(dataframe))
+pcor(c("Exam", "Anxiety", "Revise"), var(examData2))
+
+
+#create an object containing the partial correlation value 
+#so that we can use it in other commands.
+pc<-pcor(c("Exam", "Anxiety", "Revise"), var(examData2))
+
+
+#see the partial correlation and the value of R2
+pc
+#notice that the partial correlation between exam performance and 
+#exam anxiety is −.247, which is considerably less than the 
+#correlation when the effect of revision time is not
+#controlled for (r = −.441).
+
+pc^2
+#which means that exam anxiety can now account for only 6% of 
+#the variance in exam performance
+#When the effects of revision time were not controlled for, exam
+# anxiety shared 19.4% of the variation in exam scores
+
+
+#The general form of pcor.test() is:
+# pcor.test(pcor object, number of control variables, sample size)
+
+pcor.test(pc, 1, 103)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
