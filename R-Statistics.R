@@ -1,8 +1,8 @@
 ##########################################################
-#Created on Tue March 23, 2023
+#Created on Tue Aug 17, 2023
 # Tutorials for statistics using R programming
 
-# author: https://www.youtube.com/@easydatascience2508
+# author: https://www.youtube.com/@rprogramming3208
 
 ###########################################################
 
@@ -72,7 +72,7 @@ by(mtcars[myvars],
         Engine=mtcars$vs), 
    FUN=dstats)
 
-# Section 7.1.4
+
 # Summarizing data interactively with dplyr
 
 library(dplyr)
@@ -241,21 +241,21 @@ rnorm(4, mean=50, sd=10)
 
 
 # To check that the distribution looks right, make a histogram of the numbers
-x <- rnorm(400, mean=50, sd=10)
+x <- rnorm(2000, mean=50, sd=10)
 hist(x)
 
 
 # Create Matrix with Random Values in Range
 
 #create matrix of 10 random values between 1 and 20
-random_matrix <- matrix(runif(n=10, min=1, max=20), nrow=5)
+random_matrix <- matrix(runif(n=20, min=1, max=20), nrow=5)
 random_matrix
 
 
 #Create Matrix with Random Integers in Range
 
 #create matrix of 10 random integers between 1 and 20
-random_matrix <- matrix(round(runif(n=10, min=1, max=20), 0), nrow=5)
+random_matrix <- matrix(round(runif(n=20, min=1, max=20), 0), nrow=5)
 
 random_matrix
 
@@ -265,7 +265,7 @@ random_matrix
 set.seed(1)
 
 #create matrix with 10 random numbers between 1 and 20
-random_matrix <- matrix(runif(n=10, min=1, max=20), nrow=5)
+random_matrix <- matrix(runif(n=20, min=1, max=20), nrow=5)
 
 #view matrix
 random_matrix
@@ -366,78 +366,7 @@ hist(rbinom(1000, size = 10, prob = 0.2))
 
 
 
-### Lecture 6. Binomial,Hypergeometric, Negative Binomial, 
-### Geometric distributions
-
-## Binomial distribution
-
-#dbinom() Function is used to find probability at a particular 
-#value for a data that follows binomial distribution i.e. it finds:
-# Syntax:
-# dbinom(k, n, p)
-
-#Example: finds the probability at k=3 in total 10 trials
-#with p =0.2
-dbinom(3, size = 10, prob = 0.2)
-
-
-#displays a dataset containing the binomial probability distribution 
-# variable k from 0 to 10 of total 10 trials
-probabilities <- dbinom(x = c(0:10), size = 10, prob = 0.2)
-
-plot(0:10, probabilities, type = "l")
-
-
-#pbinom() Function is used to find the cumulative probability of 
-# a data following binomial distribution till a given value
-#ie it finds P(X <= k)
-# Syntax:
-# pbinom(k, n, p)
-
-
-#probability of x occur equal or less than 3 times among total 10
-# trials, with probability 0.2 for each trial
-pbinom(3, size = 10, prob = 0.2)
-
-
-#cumulative probability of binomial distribution variable,
-# from 0 to 10 of total 10 trials, with probability 0.2 for each trial
-plot(0:10, pbinom(0:10, size = 10, prob = 0.2), type = "l")
-
-
-#qbinom() Function is used to find the nth quantile, that is 
-# if P(x <= k) is given, it finds k.
-#Syntax:
-# qbinom(P, n, p)
-
-
-#find the value where cumulativa probability is 0.8791261
-# in total 10 trials, with success probabilkty 0.2 for each trial
-qbinom(0.8791261, size = 10, prob = 0.2)
-
-#find the quantile values for each cumulative probability value
-# from 0 to 1. 
-x <- seq(0, 1, by = 0.1)
-y <- qbinom(x, size = 10, prob = 0.2)
-plot(x, y, type = 'l')
-
-
-
-#rbinom() Function generates n random variables of a particular 
-# binomial probability.
-#Syntax:
-# rbinom(n, N, p)
-
-#generate 8 random variables of binomial distribution where
-# n = 10, p = 0.2
-rbinom(10, size = 10, prob = 0.2)
-
-
-#generate 1000 random variables of binomial distribution where
-# n = 10, p = 0.2
-hist(rbinom(1000, size = 10, prob = 0.2))
-
-
+### Lecture 6. Hypergeometric distributions
 
 
 #Hypergeometric distribution
@@ -499,7 +428,12 @@ hist(y_rhyper,
 
 
 
-# Negative Binomial distribution
+
+
+
+
+
+#Lecture 7. Negative Binomial distribution
 #density (probability function)
 #Syntax: dnbinom(vec, size, prob)
 
@@ -530,7 +464,18 @@ y
 
 
 
-#Geometric distribution
+
+
+
+
+
+
+
+
+
+
+
+#Lecture 8.Geometric distribution
 # dgeom function to plot
 
 # Specify x-values for dgeom function
@@ -2143,6 +2088,29 @@ pcor.test(pc, 1, 103)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 29. Wilcoxon signed rank test
+
+#example 
+library(MASS)
+data(UScrime)
+str(UScrime)
+
+sapply(UScrime[c("U1","U2")], median)
+
+with(UScrime, wilcox.test(U1, U2, paired=TRUE))
 
 
 
