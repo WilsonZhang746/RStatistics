@@ -403,7 +403,7 @@ plot(y_phyper)
 #quantile
 
 # Specify x-values for qhyper function
-x_qhyper <- seq(0, 1, by = 0.02)        
+x_qhyper <- seq(0, 1, by = 0.01)        
 
 # Apply qhyper function
 y_qhyper <- qhyper(x_qhyper, m = 50, n = 20, k = 30)    
@@ -421,8 +421,11 @@ y_rhyper
 
 # Plot of randomly drawn hyper density
 hist(y_rhyper,                                          
-     breaks = 50,
+     breaks = 100,
      main = "")
+
+
+
 
 
 
@@ -479,17 +482,45 @@ y
 # dgeom function to plot
 
 # Specify x-values for dgeom function
-x_dgeom <- seq(2, 10, by = 1)    
+x_dgeom <- seq(1, 10, by = 1)    
 
 # Apply dgeom function 
 #probability of x trials until getting a success
-y_dgeom <- dgeom(x_dgeom, prob = 0.5)    
+y_dgeom_1 <- dgeom(x_dgeom, prob = 0.5)    
 
 # Plot dgeom values 
-plot(y_dgeom)  
+plot(y_dgeom_1)  
 
 
 
+#apply pgeom() function for cumulative probabilities
+
+y_dgeom_2 <- pgeom(x_dgeom, prob = 0.5)    
+
+# Plot dgeom values 
+plot(y_dgeom_2)  
+
+
+
+#apply qgeom() function for calculating quantile values
+
+p_dgeom <- seq(0, 1, by = 0.1) 
+
+y_dgeom_3 <- qgeom(p_dgeom, prob = 0.5)    
+
+# Plot dgeom values 
+plot(y_dgeom_3)  
+
+
+
+#apply rgeom() function for random number generation
+
+N <- 10
+
+y_dgeom_4 <- rgeom(N, prob = 0.5)    
+
+# Plot dgeom values 
+plot(y_dgeom_4)  
 
 
 
