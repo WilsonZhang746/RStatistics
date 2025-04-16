@@ -51,11 +51,26 @@ scatterplotMatrix(states, smooth=FALSE,
                   main="Scatter Plot Matrix")
 
 
+
+
+
+
+
+
 # Listing 8.4 - Multiple linear regression
 states <- as.data.frame(state.x77[,c("Murder", "Population", 
                                      "Illiteracy", "Income", "Frost")])
+head(states)
+
 fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
 summary(fit)
+
+
+
+
+
+
+
 
 
 # Listing 8.5 - Mutiple linear regression with a significant interaction term
@@ -64,6 +79,9 @@ summary(fit)
 
 library(effects)
 plot(effect("hp:wt", fit,, list(wt=c(2.2, 3.2, 4.2))), lines=c(1,2,3), multiline=TRUE)
+
+
+
 
 
 # simple regression diagnostics
@@ -77,37 +95,135 @@ par(mfrow=c(1,1))
 library(car)
 states <- as.data.frame(state.x77[,c("Murder", "Population",
                                      "Illiteracy", "Income", "Frost")])
+
+states
 fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
 qqPlot(fit, simulate=TRUE, labels=row.names(states),
        id=list(method="identify"), main="Q-Q Plot")
 
+mtcars
+head(mtcars)
+fit <- lm(mpg ~ disp + hp + wt, data=mtcars)
+qqPlot(fit, simulate=TRUE, labels=row.names(mtcars),
+       id=list(method="identify"), main="Q-Q Plot")
+
+#qqplot shows residuals in the middle part lie under 
+#the straight line, whiles the other areas over the line
+#it is suspected that a second power of independent variable
+#is missing in the model.
+
+
+
 
 # Independence of errors
+
+library(car)
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                     "Illiteracy", "Income", "Frost")])
+
+states
+fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+
+#detect the presence of autocorrelation at lag 1 in the residuals
 durbinWatsonTest(fit)
+
+
+
+
+
 
 # Assessing linearity
 library(car)
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                     "Illiteracy", "Income", "Frost")])
+
+states
+fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+
 crPlots(fit)
+
+
+
+
+
+
 
 
 # Listing 8.6 - Assessing homoscedasticity
 library(car)
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                     "Illiteracy", "Income", "Frost")])
+
+states
+fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+
+
+
 ncvTest(fit)
 spreadLevelPlot(fit)
 
 
 
+
+
+
+
 # Listing 8.7 - Evaluating multi-collinearity
 library(car)
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                     "Illiteracy", "Income", "Frost")])
+
+states
+fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+
+
+summary(fit)
+
 vif(fit) 
 vif(fit) > 10 # problem?
 
+
+
+
+
+
+
+
+
 # Assessing outliers
 library(car)
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                     "Illiteracy", "Income", "Frost")])
+
+states
+fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+
 outlierTest(fit)
+
+#run again regression without Nevada
+states1 <- states[-which(row.names(states) %in% "Nevada"),]
+fit1 <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states1)
+outlierTest(fit1)
+
+
+
+
+
+
+
+
 
 #  Identifying high leverage points
 # redo as ggplot2?
+library(car)
+
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                     "Illiteracy", "Income", "Frost")])
+
+states
+fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+
+
 hat.plot <- function(fit) {
   p <- length(coefficients(fit))
   n <- length(fitted(fit))
@@ -117,7 +233,21 @@ hat.plot <- function(fit) {
 }
 hat.plot(fit)
 
+
+
+
+
+
+
+
 # Identifying influential observations
+library(car)
+
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                     "Illiteracy", "Income", "Frost")])
+
+states
+fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
 
 # Cooks Distance D
 # identify D values > 4/(n-k-1) 
@@ -126,10 +256,17 @@ plot(fit, which=4, cook.levels=cutoff)
 abline(h=cutoff, lty=2, col="red")
 
 
+
 # Added variable plots
 # add id.method="identify" to interactively identify points
 library(car)
 avPlots(fit, ask=FALSE, id=list(method="identify"))
+
+
+
+
+
+
 
 
 # Influence Plot
@@ -138,22 +275,58 @@ influencePlot(fit, id="noteworthy", main="Influence Plot",
               sub="Circle size is proportional to Cook's distance")
 
 
+
+
+
+
+
+
+
 # Listing 8.10 - Box-Cox Transformation to normality
 library(car)
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                     "Illiteracy", "Income", "Frost")])
+
+states
 summary(powerTransform(states$Murder))
+
+
+
+
+
+
 
 # Box-Tidwell Transformations to linearity
 library(car)
 boxTidwell(Murder~Population+Illiteracy,data=states)
 
 
-# Listing 8.11 - Comparing nested models using the anova function
+
+
+
+
+
+# Comparing nested models using the anova function
 states <- as.data.frame(state.x77[,c("Murder", "Population",
                                      "Illiteracy", "Income", "Frost")])
 fit1 <- lm(Murder ~ Population + Illiteracy + Income + Frost,
            data=states)
 fit2 <- lm(Murder ~ Population + Illiteracy, data=states)
 anova(fit2, fit1)
+
+
+
+
+#Stepwise regression
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                     "Illiteracy", "Income", "Frost")])
+fit <- lm(Murder ~ Population + Illiteracy + Income + Frost,
+            data=states)
+step(fit, direction="backward")
+
+
+
+
 
 
 # Listing 8.12 - Comparing models with the AIC
@@ -171,7 +344,13 @@ fit <- lm(Murder ~ Population + Illiteracy + Income + Frost,
 step(fit, direction="backward")
 
 
+
+
+
+
+
 # Listing 8.14 - All subsets regression
+
 library(leaps)
 states <- as.data.frame(state.x77[,c("Murder", "Population", 
                                      "Illiteracy", "Income", "Frost")])
@@ -187,6 +366,12 @@ subsTable <- function(obj, scale){
 }
 
 subsTable(leaps, scale="adjr2")
+
+
+
+
+
+
 
 
 
@@ -218,6 +403,29 @@ fit2 <- lm(Murder ~ Population + Illiteracy,data=states)
 shrinkage(fit2)
 
 
+
+
+
+
+
+#Relative Importance of Variables in Regression with 
+#Standardized Regression Coefficients using R
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                       "Illiteracy", "Income", "Frost")])
+zstates <- as.data.frame(scale(states))
+zfit <- lm(Murder~Population + Income + Illiteracy + Frost, data=zstates)
+coef(zfit)
+
+
+data(mtcars)
+head(mtcars)
+names(mtcars)
+zmtcars <- mtcars[,c("mpg",  "disp", "hp" ,  "drat", "wt" ,  "qsec" )]
+zmtcars <- as.data.frame(scale(zmtcars))
+zfit <- lm(mpg ~ disp + hp + drat + wt  , data=zmtcars)
+coef(zfit)
+
+
 # Listing 8.16 rlweights function for calculating relative importance of predictors
 relweights <- function(fit,...){
   R <- cor(fit$model)
@@ -232,17 +440,14 @@ relweights <- function(fit,...){
   lambdasq <- lambda ^ 2
   beta <- solve(lambda) %*% rxy
   rsquare <- colSums(beta ^ 2)
+  print("R-Square = ")
+  print(rsquare)
   rawwgt <- lambdasq %*% beta ^ 2
   import <- (rawwgt / rsquare) * 100
-  import <- as.data.frame(import)
+  #import <- as.data.frame(import)
   row.names(import) <- names(fit$model[2:nvar])
   names(import) <- "Weights"
   import <- import[order(import),1, drop=FALSE]
-  dotchart(import$Weights, labels=row.names(import),
-           xlab="% of R-Square", pch=19,
-           main="Relative Importance of Predictor Variables",
-           sub=paste("Total R-Square=", round(rsquare, digits=3)),
-           ...)
   return(import)
 }
 
@@ -251,3 +456,30 @@ states <- as.data.frame(state.x77[,c("Murder", "Population",
                                      "Illiteracy", "Income", "Frost")])
 fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
 relweights(fit, col="blue")
+
+
+
+
+R <- cor(fit$model)
+nvar <- ncol(R)
+rxx <- R[2:nvar, 2:nvar]
+rxy <- R[2:nvar, 1]
+svd <- eigen(rxx)
+evec <- svd$vectors
+ev <- svd$values
+delta <- diag(sqrt(ev))
+lambda <- evec %*% delta %*% t(evec)
+lambdasq <- lambda ^ 2
+beta <- solve(lambda) %*% rxy
+rsquare <- colSums(beta ^ 2)
+rawwgt <- lambdasq %*% beta ^ 2
+import <- (rawwgt / rsquare) * 100
+import <- as.data.frame(import)
+row.names(import) <- names(fit$model[2:nvar])
+names(import) <- "Weights"
+import <- import[order(import),1, drop=FALSE]
+dotchart(import$Weights, labels=row.names(import),
+         xlab="% of R-Square", pch=19,
+         main="Relative Importance of Predictor Variables",
+         sub=paste("Total R-Square=", round(rsquare, digits=3)),
+         ...)

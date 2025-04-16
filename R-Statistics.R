@@ -2,7 +2,7 @@
 #Created on Tue Aug 17, 2023
 # Tutorials for statistics using R programming
 
-# author: https://www.youtube.com/@rprogramming3208
+# author: https://www.youtube.com/@rprogramming32
 
 ###########################################################
 
@@ -533,7 +533,7 @@ plot(y_dgeom_4)
 
 
 
-### Lecture 7.Correlograms
+### Lecture 9.Correlograms
 
 # Load the required libraries
 
@@ -835,7 +835,7 @@ hist(x, breaks=50)
   
 # dexp(x_dexp, rate)
 # rate here represents the mean number occurence of poisson events
-#during a unit time period.
+#during a unit time period. It is 1 / beta in the formula. 
 
 # Specify x-values
 x_dexp <- seq(1, 10, by = 0.1) 
@@ -943,6 +943,7 @@ p_less_8 <- pexp(8,1/5)
 #dgamma() function is used to create gamma density plot which 
 # Syntax:
 # dgamma(x_dgamma, shape, scale) 
+#shape is alpha, scale is beta
 # scale default 1
 
 # R program to plot gamma distribution
@@ -962,6 +963,8 @@ plot(y_dgamma)
 
 #Syntax:
 # pgamma(x_pgamma, shape, scale)
+#shape is alpha, scale is beta
+#scale by default 1
 
 
 # Specify x-values for gamma function
@@ -1015,7 +1018,7 @@ hist(y_rgamma, breaks = 200, main = "")
 #Suppose that telephone calls arriving at a particular switchboard 
 # follow a Poisson process with an average of 5 calls coming per
 # minute. What is the probability that within 1 minutes
-# 2 calls have come in to the switchboard?
+# at most 2 calls have come in to the switchboard?
 # Solution : The Poisson process applies, with time until 2 Poisson 
 #events following a gamma distribution with β = 1/5 and α = 2. 
 #Denote by X = 1 the time in minutes that transpires before 2 calls 
@@ -1116,7 +1119,7 @@ qchisq(.75, df=free)
 df = 5
 
 # calculating for the values in the interval [0,5]
-print ("Calculating for the values [0,5]")
+print ("Calculating for probability in the values [0,5]")
 pchisq(5, df = df)
 
 
@@ -1316,6 +1319,8 @@ x <- seq(1, 10, by = 0.1)
 # Calling dlnorm() function
 y <- dlnorm(x)
 
+
+
 # Plot a graph
 plot(x, y)
 
@@ -1389,9 +1394,13 @@ x <- rlnorm(N, 5, 2)
 x 
 
 
+N <- 10000
 
+# Calling rlnorm() Function
+x <- rlnorm(N)
+mean(x)
 
-
+sqrt(2.718)
 
 
 
@@ -1442,8 +1451,8 @@ plot(x, y)
 # Creating a sequence of x-values
 x <- seq(0, 10, by = 0.2)
 
-k<- 1
-lambda <- 1
+k<- 2
+lambda <- 5
 
 # Calling pweibull() Function
 y <- pweibull(x, shape = k, scale=lambda)
@@ -1461,8 +1470,8 @@ plot(x, y)
 # Creating a sequence of probabilities
 probs <- seq(0, 1, by = 0.1)
 
-k<- 1
-lambda <- 1
+k<- 3
+lambda <- 3
 
 # Calling qweibull() Function
 y <- qweibull(probs, shape = k, scale=lambda)
@@ -1485,7 +1494,8 @@ x <- rweibull(N, shape = k, scale=lambda)
 x
 
 N <- 10000 
-
+k<- 3
+lambda <- 3
 # Calling rweibull() Function
 x <- rweibull(N, shape = k, scale=lambda)
 plot(hist(x))
@@ -1508,7 +1518,113 @@ plot(hist(x))
 
 
 
-### Lecture 18. t-distribution
+
+### Lecture 18. Calculating Type I and Type II Errors in 
+#hypothesis testing
+
+# Type 1 error
+
+# a type I error will occur when more than 8 individuals positive
+#in a sample of 20, and researchers reject the null hypothesis 
+#of H0 that positive rate is 0.25 in each trial.
+#when actually new machine(H1: p =0.5) is no better than the 
+#current one (H0: p = 0.25)
+
+# alpha(type 1 error)  = P(X > 8 when p = 0.25) in a 
+# binomial test
+
+#pbinom() Function is used to find the cumulative probability of 
+# a data following binomial distribution till a given value
+#ie it finds P(X <= k)
+# Syntax:
+# pbinom(k, n, p)
+
+
+#probability of x occur more than 8 times among total 20
+# trials, with probability 0.25 for each trial
+type_1_error <- 1 - pbinom(8, size = 20, prob = 0.25)
+
+type_1_error
+
+
+# Type 2 error
+
+#  When the alternative hypothesis H1 that p = 1/2 is true, 
+# and we do not reject H0 (p = 0.25) when the positive cases less than
+#8 in a sample of 20 of a binomial process
+
+#pbinom() Function is used to find the cumulative probability of 
+# a data following binomial distribution till a given value
+#ie it finds P(X <= k)
+# Syntax:
+# pbinom(k, n, p)
+
+
+#probability of x occur less than or equal to 8 times among total 20
+# trials, with probability 0.5 for each trial
+type_2_error <- pbinom(8, size = 20, prob = 0.5)
+
+type_2_error
+
+
+
+
+
+
+
+
+### Lecture 19. Calculating The Power of a Test in Hypothesis Testing
+
+#  When the alternative hypothesis H1 that p = 1/2 is true, 
+# and we do not reject H0 (p = 0.25) when the positive cases less than
+#8 in a sample of 20 of a binomial process
+#then we commit a type 2 error, beta
+#The power of a test is 1 - beta
+
+#pbinom() Function is used to find the cumulative probability of 
+# a data following binomial distribution till a given value
+#ie it finds P(X <= k)
+# Syntax:
+# pbinom(k, n, p)
+
+
+#probability of x occur less than or equal to 8 times among total 20
+# trials, with probability 0.5 for each trial
+type_2_error <- pbinom(8, size = 20, prob = 0.5)
+
+power_test <- 1 - type_2_error 
+
+power_test
+
+
+
+#if we change the critical rule as 7,When the alternative hypothesis
+#H1 that p = 1/2 is true, and we do not reject H0 (p = 0.25) when 
+#the positive cases less than 8 in a sample of 20 of a binomial 
+#process
+
+#then the type 2 error:
+
+type_2_error <- pbinom(7, size = 20, prob = 0.5)
+
+power_test <- 1 - type_2_error 
+
+power_test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 20. t-distribution
 
 #dt() function is used To find the value of probability density (pdf)
 #of the Student’s t-distribution given a random variable x
@@ -1613,7 +1729,7 @@ p_sample   #0.0169
 
 
 
-## Lecture 19. Normal Quantile-Quantile Plot
+## Lecture 21. Normal Quantile-Quantile Plot
 
 # Example 1
 # Create random normally distributed values
@@ -2068,6 +2184,8 @@ setwd("d:\\RStatistics-Tutorial")
 #create a dataframe containing only the three variables of interest.
 examData = read.delim("Exam Anxiety.dat", header = TRUE)
 examData2 <- examData[, c("Exam", "Anxiety", "Revise")]
+
+names(examData2) <- c("score","stress","time")
 head(examData2)
 
 #conduct a partial correlation between exam anxiety and exam 
@@ -2076,12 +2194,14 @@ head(examData2)
 library(ggm)
 
 #pcor(c("var1", "var2", "control1", "control2" etc.), var(dataframe))
-pcor(c("Exam", "Anxiety", "Revise"), var(examData2))
-
+#pcor(c("Exam", "Anxiety", "Revise"), var(examData2))
+pcor(c("score","stress","time"), var(examData2))
 
 #create an object containing the partial correlation value 
 #so that we can use it in other commands.
-pc<-pcor(c("Exam", "Anxiety", "Revise"), var(examData2))
+#pc<-pcor(c("Exam", "Anxiety", "Revise"), var(examData2))
+
+pc<-pcor(c("score","stress","time"), var(examData2))
 
 
 #see the partial correlation and the value of R2
@@ -2146,6 +2266,82 @@ with(UScrime, wilcox.test(U1, U2, paired=TRUE))
 
 
 
+
+
+
+
+
+
+
+#Lecture 30. F distribution and F-test
+#Example
+#An experiment was performed to compare the abrasive wear of 
+#two different laminated materials. Twelve pieces of material 1 
+#were tested by exposing each piece to a machine measuring wear. 
+#Ten pieces of material 2 were similarly tested. In each case, 
+#the depth of wear was observed. The samples of material 1 gave 
+#an average (coded) wear of 85 units with a sample standard 
+#deviation of 4, while the samples of material 2 gave an average 
+#of 81 with a sample standard deviation of 5. 
+#Assume the populations to be approximately normal. We assumed 
+#that the two unknown population variances were equal. 
+#Were we justified in making this assumption? 
+#Use a 0.10 level of significance.
+
+# calculate sample variance 
+var1 <- 4 * 4 
+var2 <- 5 * 5
+
+var1 
+var2 
+
+#quantile value for f0.05(11,9) and f0.95(11,9)
+q005 <- qf(1-0.05,11,9)
+q005
+
+q095 <- qf(1-0.95,11,9)
+q095
+
+#sample F statistics
+
+fsample <- var1 /var2
+
+fsample
+
+#conclusion:
+#because q095 < fsmaple < q005
+#Do not reject H0 . 
+#Conclude that there is insufficient evidence that the 
+#variances differ.
+
+
+
+
+
+
+###Draw Multivariate Statistical Data in R
+
+library(MultiRNG)
+m_vec <- c(32, 69, 19)
+s_mtx <- matrix(c(600, 400, 200,
+                    400, 1000, -200, 
+                    200, -200, 300), nrow=3, ncol=3) 
+multidf <- draw.d.variate.normal(200, 3, m_vec, s_mtx) 
+multidf <- as.data.frame(multidf) 
+head(multidf,15)
+
+
+
+#Calculations Using z of the Normal Distribution
+
+#probability of standard normal variate less than -1.25
+pnorm(-1.25)
+
+#probability of standard normal variate larger than 1.875
+1-pnorm(1.875)
+
+#probability of standard normal variate between -1.25 and 1.875
+pnorm(1.875) - pnorm(-1.25)
 
 
 
