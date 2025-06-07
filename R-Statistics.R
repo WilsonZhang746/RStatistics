@@ -2346,3 +2346,69 @@ pnorm(1.875) - pnorm(-1.25)
 
 
 
+
+
+### Computing Basic Statistics
+
+x <- c(0, 1, 1, 2, 3, 5, 8, 13, 21, 34)
+mean(x)
+
+median(x)
+
+sd(x)
+
+var(x)
+
+
+x <- c(0, 1, 1, 2, 3, 5, 8, 13, 21, 34)
+y <- log(x + 1)
+
+
+cov(x, y)
+
+cor(x, y)
+
+
+
+
+
+
+### Skewness
+setwd("d:\\Crawley-StatisticsAnIntroductionUsingR-2014-Point45\\Datafiles")
+
+data <- read.csv("skewdata.csv")
+attach(data)
+
+
+skew <- function(x){
+  m3 <- sum((x-mean(x))^3)/length(x)
+  s3 <- sqrt(var(x))^3
+  m3/s3  }
+
+hist(values,main="",col="green")
+
+skew(values)
+skew(values)/sqrt(6/length(values))
+1 - pt(2.949,28)
+
+#using e1071 package
+install.packages("e1071")
+library(e1071)
+
+skewness_value <- skewness(values)
+print(skewness_value)
+
+#using moments package
+install.packages("moments")
+library(moments)
+
+skewness_value <- skewness(values)
+print(skewness_value)
+
+
+
+
+
+
+
+
