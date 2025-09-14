@@ -2388,6 +2388,9 @@ skew <- function(x){
 hist(values,main="",col="green")
 
 skew(values)
+
+
+
 skew(values)/sqrt(6/length(values))
 1 - pt(2.949,28)
 
@@ -2411,4 +2414,85 @@ print(skewness_value)
 
 
 
+
+
+### kurtosis
+
+setwd("d:\\Crawley-StatisticsAnIntroductionUsingR-2014-Point45\\Datafiles")
+
+data <- read.csv("skewdata.csv")
+attach(data)
+hist(values,main="",col="green")
+
+kurtosis <- function(x) {
+  m4 <- sum((x-mean(x))^4)/length(x)
+  s4 <- var(x)^2
+  m4/s4 - 3  }
+
+kurtosis(values)
+
+
+#Hypothesis testing of Kurtosis
+kurtosis(values)/sqrt(24/length(values))
+
+
+#For our present data, we find that kurtosis is not 
+#significantly different from normal, because the t value (1.45)
+# is substantially less than the rule of thumb (2.0).
+
+
+
+
+
+
+### Comparing Two Variances	using F-test
+
+setwd("d:\\Crawley-StatisticsAnIntroductionUsingR-2014-Point45\\Datafiles")
+f.test.data <- read.csv("f.test.data.csv")
+attach(f.test.data)
+names(f.test.data)
+
+var(gardenB)
+
+var(gardenC)
+
+qf(0.95,9,9)
+
+F.ratio <- var(gardenC)/var(gardenB)
+F.ratio
+
+
+1 - pf(F.ratio,9,9)
+
+
+
+
+
+
+
+
+
+### Pearson correlation coefficient,Spearman’s correlation 
+### coefficient,Kendall’s tau
+
+#Computing Pearson’s r using R
+setwd("d:\\RStatistics-Tutorial")   # to set working directory
+grade <- read.table("ExamAnxiety.dat",  header=TRUE, sep=",")                                      
+grade
+
+grade2 <- grade[, c("Exam", "Anxiety", "Revise")]
+cor(grade2)
+
+
+#Spearman’s correlation coefficient
+liarData = read.delim("TheBiggestLiar.dat", header = TRUE)
+
+liarData
+
+cor(liarData$Position, liarData$Creativity, method = "spearman")
+
+
+
+#Kendall’s tau
+cor(liarData$Position, liarData$Creativity, method = "kendall")
 
