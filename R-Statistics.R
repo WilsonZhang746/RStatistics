@@ -2496,3 +2496,29 @@ cor(liarData$Position, liarData$Creativity, method = "spearman")
 #Kendall’s tau
 cor(liarData$Position, liarData$Creativity, method = "kendall")
 
+
+
+
+
+
+
+
+
+
+###Binomial test
+#Binomial Test is used to measure if there is difference
+#between the two cases or policies, based on the counting
+#results associated with two cases of event.  
+
+#For example, nine anthlets have been trained under
+#a new regime and under the conventional one. Is it a
+#strong evidence that the new regime produces significantly
+#better scores in competition, when 8 of 9 getting a better
+#score with the new regime ?
+
+
+binom.test(1,9)
+
+binom.test(8,9)
+  
+
