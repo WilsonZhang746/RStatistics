@@ -2522,3 +2522,42 @@ binom.test(1,9)
 binom.test(8,9)
   
 
+
+
+
+
+
+
+
+### Calculating Probabilities for Continuous Distributions
+
+#normal distribution
+# P(X ≤ 66) given that X ~ N(70, 3):
+
+pnorm(66, mean = 70, sd = 3)
+
+
+#Exponential distribution
+#use pexp() to calculate the probability that an exponential 
+#variable with a mean of 40 could be less than 20:
+  
+pexp(20, rate = 1 / 40)
+
+
+#use lower.tail=FALSE to specify the survival function, P(X > x).
+pexp(50, rate = 1 / 40, lower.tail = FALSE)
+
+#or just use 1 minus the cumulative probability
+1 - pexp(50, rate = 1 / 40)
+
+
+#P(x1 < X < x2), is computed as the difference between two 
+#cumulative probabilities
+
+#the probability that it could fall between 20 and 50:
+
+pexp(50, rate = 1 / 40) - pexp(20, rate = 1 / 40)
+
+
+
+
